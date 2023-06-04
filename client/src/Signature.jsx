@@ -26,8 +26,9 @@ function Signature({ walletAddress }) {
   };
 
   return (
-    <div>
-      <h2>Signature Component</h2>
+    <div className="container signature">
+     
+      <h2>Generate Signature</h2>
       <label>
         Wallet Address:
         <input type="text" value={walletAddress} disabled />
@@ -38,13 +39,15 @@ function Signature({ walletAddress }) {
         <input type="text" value={privateKey} onChange={handlePrivateKeyChange} />
       </label>
       <br />
-      <button onClick={generateMessage}>Generate</button>
+      <button  onClick={generateMessage}>Generate</button>
       <br />
       <label>
         Signature:
         <textarea value={message} readOnly />
       </label>
+      
     </div>
+    
   );
 }
 
