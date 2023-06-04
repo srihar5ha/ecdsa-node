@@ -4,8 +4,17 @@ import server from "./server";
 function Transfer({ address, setBalance }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [signature, setSignature] = useState("");
+  const [publicKey, setpublicKey] = useState("");
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
+  
+  const handleSignatureChange = (event) => {
+    setSignature(event.target.value);
+  };
+  const handlePublicKeyChange = (event) => {
+    setpublicKey(event.target.value);
+  };
 
   async function transfer(evt) {
     evt.preventDefault();
@@ -17,7 +26,10 @@ function Transfer({ address, setBalance }) {
         sender: address,
         amount: parseInt(sendAmount),
         recipient,
+        signature,
+        publicKey
       });
+
       setBalance(balance);
     } catch (ex) {
       alert(ex.response.data.message);
@@ -44,6 +56,25 @@ function Transfer({ address, setBalance }) {
           value={recipient}
           onChange={setValue(setRecipient)}
         ></input>
+      </label>
+
+      <label>
+        Signature
+        <input
+          type="text"
+          value={signature}
+          onChange={setValue(setSignature)}
+          placeholder="enter the signature here"
+        />
+      </label>
+      <label>
+        Public Key
+        <input
+          type="text"
+          value={publicKey}
+          onChange={setValue(setpublicKey)}
+          placeholder="enter public key here"
+        />
       </label>
 
       <input type="submit" className="button" value="Transfer" />
